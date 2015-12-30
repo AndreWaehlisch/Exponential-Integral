@@ -1,0 +1,155 @@
+\documentclass[bibliography=totocnumbered]{scrartcl}
+
+\usepackage[utf8]{inputenc} %UTF8 ohne BOM!
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+
+\usepackage{amssymb,amsmath}
+
+\usepackage[backend=biber,sorting=none,hyperref=true,sortcites=true,maxbibnames=6,minbibnames=3,maxcitenames=1,mincitenames=1]{biblatex}
+\usepackage[strict=true]{csquotes}
+\addbibresource{main.bib}
+
+\usepackage{hyperref} %linktocpage=true: Zahlen im Inhaltsverzeichnis verlinken, antatt Text. %Um Links nicht farbig zu machen benutze: pdfborder={0 0 0} oder colorlinks=false,allbordercolors=white
+\usepackage{breakurl} %[anythingbreaks]
+%\usepackage[all]{hypcap} %damit beim Klick auf Link zu einem Bild, das Bild angezeigt wird und nicht die caption <funktioniert auch so?!>
+
+\title{Exponential Integral $E_1\left(x\right)$}
+\author{André Wählisch}
+\date{Last update: \today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\clearpage
+	
+	\section{Pre-stuff}
+	
+	All variables and parameters are considered real, if not stated otherwise.
+	
+	\subsection[Definition of E1(x)]{Definition of $E_1\left(x\right)$}
+	
+	\begin{gather}
+		E_1\left(x\right)=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)
+	\end{gather}
+	
+	\subsection[Definition of D(x)]{Definition of $D\left(x\right)$}
+	\label{subsec: D}
+	
+	\begin{gather}
+		D\left(x\right)=e^xE_1\left(x\right)\qquad\left(x>0\right)\label{eq: D}
+	\end{gather}
+	
+	\clearpage
+	
+	\section[Exponential Integral E1(x)]{Exponential Integral $E_1\left(x\right)$}
+	
+	\subsection{Integral Representations}
+	
+	\subsubsection[Integral representation not involving x in the integral limits]{$E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$, source is eq. (2b) of \cite{boer1990calc}}
+	\label{subsubsec: def01}
+	
+	Use substitution $w=xt$:
+	
+	\begin{align}
+		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)\\
+		&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt
+	\end{align}
+	
+	\subsubsection[Integral representation not involving exp(x) in the integral]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
+	\label{subsubsec: intrep01}
+	\begin{align}
+		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)\\
+		&=e^{-x}\int_{x}^{\infty}\frac{e^{x-w}}{w}dw
+	\end{align}
+	
+	First use substitution $\left(x-w\right)=-y$, then use substitution $y=-\ln{t}$:
+	
+	\begin{align}
+		e^{-x}\int_{x}^{\infty}\frac{e^{x-w}}{w}dw&=e^{-x}\int_{0}^{\infty}\frac{e^{-y}}{x+y}dy\\
+		&=e^{-x}\int_{1}^{0}\frac{t}{x-\ln{t}}\left(\frac{-1}{t}\right)dt\\
+		&=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt
+	\end{align}
+	
+	\subsection{Special Values}
+	
+	\subsubsection[A derivative of E1]{$\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$}
+	\label{subsubsec: specval_deriv}
+	
+	Start with integral representation of $E_1\left(x\right)$ found in subsection \ref{subsubsec: def01}:
+	
+	\begin{align}
+		\frac{d}{dx}E_1\left[b\left(x+c\right)\right]&=\frac{d}{dx}\int_{1}^{\infty}\frac{e^{-b\left(x+c\right)t}}{t}dt\\
+		&=\int_{1}^{\infty}\left(-bt\right)\frac{e^{-b\left(x+c\right)t}}{t}dt\\
+		&=-b\int_{1}^{\infty}e^{-b\left(x+c\right)t}dt\\
+		&=\frac{-b}{-b\left(x+c\right)}\left[e^{-b\left(x+c\right)t}\right]^{\infty}_{t=1}\\
+		&=-\frac{e^{-b\left(x+c\right)}}{x+c}\qquad\left(b\left(x+c\right)>0\right)
+	\end{align}
+	
+	\subsubsection[A limit of E1]{$\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$}
+	\label{subsubsec: specval01}
+	
+	Start with integral representation of $E_1\left(x\right)$ found in subsection \ref{subsubsec: intrep01}:
+	
+	\begin{align}
+		\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]&=\lim_{x\rightarrow\infty}e^{-b\left(x+c\right)}\int_{0}^{1}\frac{1}{b\left(x+c\right)-\ln{t}}dt\\
+		&=e^{-bc}\int_{0}^{1}\left[\lim_{x\rightarrow\infty}\frac{e^{-bx}}{bx+bc-\ln{t}}\right]dt
+	\end{align}
+	
+	The perhaps suspected problem value of $\ln{t}\overset{t\rightarrow0}{\longrightarrow}-\infty$ in the limit is in fact no problem, when you rewrite it like the following:
+	
+	\begin{align}
+	\lim_{x\rightarrow\infty}\frac{e^{-bc}}{bx+bc-\ln{\frac{1}{x}}}&=\left(\lim_{x\rightarrow\infty}e^{-bc}\right)\cdot\left(\lim_{x\rightarrow\infty}\frac{1}{bx+bc-\ln{\frac{1}{x}}}\right)\\
+	&=0\cdot0\\
+	&=0\qquad\left(b\geq0\right)
+	\end{align}
+	
+	The desired limit follows, taking into account, that for $\ln{t}\overset{t\rightarrow1}{\longrightarrow}0$ the limit only exists for positive $b$:
+	
+	\begin{align}
+		\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]&=0\qquad\left(b>0\right)
+	\end{align}
+
+	\subsubsection[A limit of E1]{$\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$}
+	\label{subsubsec: specval02}
+	
+	Use subsection \ref{subsubsec: specval01} to evaluate the limit in the first step, $\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$ (which is only valid for $b>0$), then use the rule of de L'Hospital:
+	
+	\begin{align}
+		\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]&=\lim_{x\rightarrow\infty}\frac{E_1\left[b\left(x+c\right)\right]}{e^{-ax}}\\
+		&=\text{\raisebox{-9pt}{\glqq}}\frac{0}{0}\text{\raisebox{9pt}{\grqq}}\qquad\left(a>0, b>0\right)\\
+		\lim_{x\rightarrow\infty}\frac{\frac{d}{dx}E_1\left[b\left(x+c\right)\right]}{\frac{d}{dx}e^{-ax}}&=\lim_{x\rightarrow\infty}\frac{-\left(\frac{e^{-b\left(x+c\right)}}{x+c}\right)}{-ae^{-ax}}\\
+		&=\frac{1}{a}\lim_{x\rightarrow\infty}\frac{e^{-b\left(x+c\right)+ax}}{x+c}\\
+		&=\frac{e^{-bc}}{a}\lim_{x\rightarrow\infty}\frac{e^{x\left(a-b\right)}}{x+c}\\
+		&=0\qquad\left(a>0, b>0, a-b<0\right)
+	\end{align}
+	
+
+	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
+	
+	\subsubsection[A integral of E1 with exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}$}
+	
+	%TODO: compare with result in geller
+	
+	First integrate by parts using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}, then make use of the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$, which can be found in subsection \ref{subsubsec: specval02}:
+	
+	\begin{align}
+		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=\left[\frac{e^{ax}}{a}E_1\left[b\left(x+c\right)\right]\right]^{\infty}_{x=0}-\int_{0}^{\infty}\frac{e^{ax}}{a}\left(-\frac{e^{-b\left(x+c\right)}}{x+c}\right)dx\\
+		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-x\left(b-a\right)}}{x+c}dx
+	\end{align}
+	
+	Now, first use substitution $x\left(b-a\right)=y$ with $\frac{dx}{dy}=\left(b-a\right)^{-1}$, then use substitution $y+c\left(b-a\right)=t$. In the last steps use the definition of $D\left(x\right)$ from eq. \eqref{eq: D}, which can be found in subsection \ref{subsec: D} on page \pageref{subsec: D}:
+	
+	\begin{align}
+		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{\frac{y}{b-a}+c}\frac{dy}{b-a}\\
+		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{y+c\left(b-a\right)}dy\\
+		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{c\left(b-a\right)}^{\infty}\frac{e^{-t}e^{c\left(b-a\right)}}{t}dt\\	&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-ac}}{a}E_1\left[c\left(b-a\right)\right]\qquad\left(c\left(b-a\right)>0\right)\label{eq: int01Condition}\\
+		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+e^{-ac}e^{bc}e^{-c\left(b-a\right)}D\left[c\left(b-a\right)\right]\right\}\\
+		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}
+	\end{align}
+	
+	Arriving at the equation (A2c) found in the appendix of \cite{boer1990calc}. Provided positive $c$ the condition $a-b<0$ results from eq. \eqref{eq: int01Condition}.
+	
+	\clearpage
+	\printbibliography
+\end{document}

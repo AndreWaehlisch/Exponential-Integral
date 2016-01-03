@@ -1,22 +1,23 @@
 \documentclass[bibliography=totocnumbered]{scrartcl}
 
-\usepackage[utf8]{inputenc} %UTF8 ohne BOM!
+\usepackage[utf8]{inputenc} %UTF8 without BOM!
 \usepackage[T1]{fontenc}
 \usepackage[british]{babel}
 
-\usepackage{amssymb,amsmath}
+\usepackage{amssymb,amsmath,mathtools, booktabs}
 
-\usepackage[backend=biber,sorting=none,hyperref=true,sortcites=true,maxbibnames=6,minbibnames=3,maxcitenames=1,mincitenames=1]{biblatex}
+\usepackage[style=alphabetic,backend=biber,hyperref=true,sortcites=true,maxbibnames=6,minbibnames=3,maxcitenames=1,mincitenames=1]{biblatex}
 \usepackage[strict=true]{csquotes}
 \addbibresource{main.bib}
 
-\usepackage{hyperref} %linktocpage=true: Zahlen im Inhaltsverzeichnis verlinken, antatt Text. %Um Links nicht farbig zu machen benutze: pdfborder={0 0 0} oder colorlinks=false,allbordercolors=white
-\usepackage{breakurl} %[anythingbreaks]
-%\usepackage[all]{hypcap} %damit beim Klick auf Link zu einem Bild, das Bild angezeigt wird und nicht die caption <funktioniert auch so?!>
+\usepackage[linktocpage=true]{hyperref} %linktocpage=true: Zahlen im Inhaltsverzeichnis verlinken, antatt Text. %Um Links nicht farbig zu machen benutze: pdfborder={0 0 0} oder colorlinks=false,allbordercolors=white
+\usepackage[anythingbreaks]{breakurl}
 
 \title{Exponential Integral $E_1\left(x\right)$}
-\author{André Wählisch}
+\author{André Wählisch\\\href{mailto:andre.waehlisch@physik.tu-berlin.de}{andre.waehlisch@physik.tu-berlin.de}}
 \date{Last update: \today}
+
+\newcommand{\assume}[1][\text{MISSING PARAMETER}]{,\qquad\left(#1\right)}
 
 \begin{document}
 	\maketitle
@@ -25,19 +26,55 @@
 	
 	\section{Pre-stuff}
 	
-	All variables and parameters are considered real, if not stated otherwise.
+	\subsection{Informational}
 	
-	\subsection[Definition of E1(x)]{Definition of $E_1\left(x\right)$}
+	\begin{itemize}
+		\item Github: \url{https://github.com/AndreWaehlisch/Exponential-Integral}
+		\item Some links about the exponential integral:
+		\begin{itemize}
+			\item wolfram.com:
+			\begin{itemize}
+				\item $E_1$ and $Ei$:
+				\begin{itemize}
+					\item \url{http://mathworld.wolfram.com/ExponentialIntegral.html}
+					\item \url{http://functions.wolfram.com/GammaBetaErf/ExpIntegralEi/}
+					\item \url{http://www.wolframalpha.com/input/?i=ExpIntegralE[1,x]}
+					\item \url{http://www.wolframalpha.com/input/?i=ExpIntegralEi[x]}
+				\end{itemize}
+				\item $E_n$:
+				\begin{itemize}
+					\item \url{http://mathworld.wolfram.com/En-Function.html}
+					\item \url{http://functions.wolfram.com/GammaBetaErf/ExpIntegralE/}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	
+	\subsection{Mathematical notes}
+	
+	\begin{enumerate}
+		\item All variables and parameters are considered real, if not stated otherwise.
+	\end{enumerate}
+	
+	\subsection{Definitions}
+	
+	\subsubsection[Definition of Exponential Integral E1(x)]{Definition of Exponential Integral $E_1\left(x\right)$}
 	
 	\begin{gather}
-		E_1\left(x\right)=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)
+		E_1\left(x\right)=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\label{eq: E1}
 	\end{gather}
 	
-	\subsection[Definition of D(x)]{Definition of $D\left(x\right)$}
-	\label{subsec: D}
+	\subsubsection[Definition of D(x)]{Definition of $D\left(x\right)$}
+	\label{subsubsec: D}
 	
 	\begin{gather}
-		D\left(x\right)=e^xE_1\left(x\right)\qquad\left(x>0\right)\label{eq: D}
+		D\left(x\right)=e^xE_1\left(x\right)\assume[x>0]\label{eq: D}
+	\end{gather}
+	
+	\subsubsection[Definition of Y(a,b,c,d)]{Definition of $Y\left(a, b, c, d\right)$}
+	
+	\begin{gather}
+		Y\left(a, b, c, d\right)=\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx\label{eq: Y}
 	\end{gather}
 	
 	\clearpage
@@ -46,20 +83,20 @@
 	
 	\subsection{Integral Representations}
 	
-	\subsubsection[Integral representation not involving x in the integral limits]{$E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$, source is eq. (2b) of \cite{boer1990calc}}
+	\subsubsection[A integral representation not involving x in the integral limits]{$E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$, source is eq. (2b) of \cite{boer1990calc}}
 	\label{subsubsec: def01}
 	
 	Use substitution $w=xt$:
 	
 	\begin{align}
-		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)\\
+		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\\
 		&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt
 	\end{align}
 	
-	\subsubsection[Integral representation not involving exp(x) in the integral]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
+	\subsubsection[A integral representation not involving exp(x) in the integrand]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
 	\label{subsubsec: intrep01}
 	\begin{align}
-		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\qquad\left(x>0\right)\\
+		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\\
 		&=e^{-x}\int_{x}^{\infty}\frac{e^{x-w}}{w}dw
 	\end{align}
 	
@@ -69,6 +106,17 @@
 		e^{-x}\int_{x}^{\infty}\frac{e^{x-w}}{w}dw&=e^{-x}\int_{0}^{\infty}\frac{e^{-y}}{x+y}dy\\
 		&=e^{-x}\int_{1}^{0}\frac{t}{x-\ln{t}}\left(\frac{-1}{t}\right)dt\\
 		&=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt
+	\end{align}
+	
+	\subsubsection[A integral representation]{$E_1\left(x\right)=e^{-x}\int_{0}^{\infty}\frac{e^{-xt}}{t+1}dt$}
+	\label{subsubsec: intrep02}
+	
+	Use substitution $\frac{w}{x}-1=t$:
+	
+	\begin{align}
+		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\\
+		&=\int_{0}^{\infty}\frac{e^{-x\left(t+1\right)}}{x\left(t+1\right)}\left(xdt\right)\\
+		&=e^{-x}\int_{0}^{\infty}\frac{e^{-xt}}{t+1}dt
 	\end{align}
 	
 	\subsection{Special Values}
@@ -86,7 +134,7 @@
 		&=-\frac{e^{-b\left(x+c\right)}}{x+c}\qquad\left(b\left(x+c\right)>0\right)
 	\end{align}
 	
-	\subsubsection[A limit of E1]{$\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$}
+	\subsubsection[A limit of E1 as x approaches infinity]{$\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$}
 	\label{subsubsec: specval01}
 	
 	Start with integral representation of $E_1\left(x\right)$ found in subsection \ref{subsubsec: intrep01}:
@@ -104,13 +152,13 @@
 	&=0\qquad\left(b\geq0\right)
 	\end{align}
 	
-	The desired limit follows, taking into account, that for $\ln{t}\overset{t\rightarrow1}{\longrightarrow}0$ the limit only exists for positive $b$:
+	The desired limit follows. We have to take into account, that for $\ln{t}\overset{t\rightarrow1}{\longrightarrow}0$ the limit only exists for positive $b$:
 	
 	\begin{align}
 		\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]&=0\qquad\left(b>0\right)
 	\end{align}
 
-	\subsubsection[A limit of E1]{$\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$}
+	\subsubsection[A limit of E1, involving the exponential function]{$\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$}
 	\label{subsubsec: specval02}
 	
 	Use subsection \ref{subsubsec: specval01} to evaluate the limit in the first step, $\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$ (which is only valid for $b>0$), then use the rule of de L'Hospital:
@@ -127,29 +175,242 @@
 
 	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
 	
-	\subsubsection[A integral of E1 with exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}$}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{cccc}
+			\toprule
+			Integral & $Y$-representation & Location & Location in \cite{boer1990calc}\\
+			\midrule
+			$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,d\right)$ & \eqref{eq: generalIntegralOfE1}, p. \pageref{eq: generalIntegralOfE1} & eq. (A2a)\\
+			$\int_{0}^{d}e^{ax}E_1\left[bd\right]dx$ & $Y\left(a,b,0,d\right)$ & \eqref{eq: generalIntegralOfE4}, p. \pageref{eq: generalIntegralOfE4} & eq. (A2b)\\
+			$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,\infty\right)$ & \eqref{eq: generalIntegralOfE2}, p. \pageref{eq: generalIntegralOfE2} & eq. (A2c)\\
+			$\int_{0}^{\infty}e^{ax}E_1\left[bx\right]dx$ & $Y\left(a,b,0,\infty\right)$ & \eqref{eq: generalIntegralOfE3}, p. \pageref{eq: generalIntegralOfE3} & eq. (A2d)\\
+			\bottomrule
+		\end{tabular}
+		\caption{Table of integrals encountered in \cite{boer1990calc}}
+		\label{tab: tableOfIntegrals}
+	\end{table}
+	
+	\subsubsection[A definite integral having two exponential integrals as result]{$\int_{a}^{b}\frac{e^{-x}}{x}dx=E_1\left(a\right)-E_1\left(b\right)$}
+	\label{subsubsec: definiteIntegral}
+	
+	Start with the negative derivative from subsection \ref{subsubsec: specval_deriv}, while setting $b=1$ and $c=0$:
+	
+	\begin{gather}
+		-\frac{d}{dx}E_1\left(x\right)=\frac{e^{-x}}{x}\label{eq: derivE1(x)}
+	\end{gather}
+	
+	Now, just apply the \emph{fundamental theorem of calculus} (in German: \emph{Hauptsatz der Differential- und Integralrechnung}): For certain conditions to $f\left(x\right), a, b$ and if $\frac{d}{dx}F\left(x\right)=f\left(x\right)$, then $\int_{a}^{b}f\left(x\right)dx=F\left(b\right)-F\left(a\right)$. Applying this to equation \eqref{eq: derivE1(x)} leads to the desired result. We assume $a\neq{}b$, so that the integral is not trivially zero. Also required due to the infinite discontinuity of the integrand at $x=0$ is that $a$ and $b$ are \emph{both} positive or \emph{both} negative, furthermore both must be non-zero:
+
+	\begin{gather}
+		\int_{a}^{b}\frac{e^{-x}}{x}dx=E_1\left(a\right)-E_1\left(b\right)\qquad\left(a\neq{}b, ab>0\right)
+	\end{gather}
+	
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{e^{-bc}}{a}\left(e^{\left(a-b\right)d}\left\{D\left[b\left(c+d\right)\right]-D\left[\left(-a+b\right)\left(c+d\right)\right]\right\}-D\left[bc\right]+D\left[\left(-a+b\right)c\right]\right)$}
+	\label{subsubsec: generalIntegralOfE1}
+	
+	This is the general case of $Y\left(a, b, c, d\right)=\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx$, found in \cite{boer1990calc}. Special cases, e.g. $c=0$ are considered in the following subsections. Now, first integrate by parts, using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}:
+	
+	\begin{align}
+		\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]&=\left\{\frac{e^{ax}}{a}E_1\left[b\left(x+c\right)\right]\right\}_{x=0}^d-\int_{0}^{d}\frac{e^{ax}}{a}\frac{d}{dx}E_1\left[b\left(x+c\right)\right]dx\\
+		&=\frac{e^{ad}}{a}E_1\left[b\left(d+c\right)\right]-\frac{E_1\left[bc\right]}{a}-\int_{0}^{d}\frac{e^{ax}}{a}\left\{-\frac{e^{-b\left(x+c\right)}}{x+c}\right\}dx\\
+		&=\frac{e^{ad}}{a}E_1\left[b\left(d+c\right)\right]-\frac{E_1\left[bc\right]}{a}+\frac{e^{-bc}}{a}\int_{0}^{d}\frac{e^{-x\left(b-a\right)}}{x+c}dx\label{eq: stopEqOfFirstIntegral}
+	\end{align}
+	
+	To simplify the integral in the last summand, first use the abbreviation $\phi=b-a$ and the substitution $x+c=y$, then use the substitution $\left(b-a\right)y=\phi{}y=t$. In the final step, to get to the intermediate result of equation \eqref{eq: intermediateResult}, use the integral $\int_{a}^{b}\frac{e^{-x}}{x}dx=E_1\left(a\right)-E_1\left(b\right)$, found in subsection  \ref{subsubsec: definiteIntegral}:
+	
+	\begin{align}
+		\int_{0}^{d}\frac{e^{-x\left(b-a\right)}}{x+c}dx&=\int_{0}^{d}\frac{e^{-x\phi}}{x+c}dx\\
+		&=\int_{c}^{d+c}\frac{e^{-\left(y-c\right)\phi}}{y}dy\\
+		&=e^{c\phi}\int_{c}^{d+c}\frac{e^{-y\phi}}{y}dy\\
+		&=e^{c\phi}\int_{\phi{}c}^{\phi\left(d+c\right)}\frac{e^{-t}}{t\phi^{-1}}\phi^{-1}dt\\
+		&=e^{c\phi}\left\{E_1\left[\phi{}c\right]-E_1\left[\phi\left(d+c\right)\right]\right\}\label{eq: intermediateResult}
+	\end{align}
+	
+	To arrive at the desired result we just put the intermediate step \eqref{eq: intermediateResult} into equation \eqref{eq: stopEqOfFirstIntegral}, and restore the abbreviation $\phi=b-a$. Then rearrange the terms to get to equation (A2a) from the appendix of \cite{boer1990calc}. In the last steps use the definition of $D\left(x\right)$ from eq. \eqref{eq: D}, which can be found in subsection \ref{subsubsec: D} on page \pageref{subsubsec: D}:
+	
+	\begin{align}
+			\begin{split}
+				\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]=&\frac{e^{ad}}{a}E_1\left[b\left(d+c\right)\right]-\frac{E_1\left[bc\right]}{a}\\
+				&+\frac{e^{-bc}e^{c\left(b-a\right)}}{a}\left\{E_1\left[\left(b-a\right)c\right]-E_1\left[\left(b-a\right)\left(d+c\right)\right]\right\}
+			\end{split}\\
+			\begin{split}
+				=&\frac{1}{a}\left\{e^{ad}E_1\left[b\left(c+d\right)\right]-e^{-ac}E_1\left[\left(-a+b\right)\left(c+d\right)\right]\right. \\
+				&\left. {}-E_1\left[bc\right]+e^{-ac}E_1\left[\left(-a+b\right)c\right]\vphantom{e^{ad}}\right\}
+			\end{split}\\
+			\begin{split}
+				=&\frac{e^{-bc}}{a}\left(e^{\left(a-b\right)d}\left\{D\left[b\left(c+d\right)\right]-D\left[\left(-a+b\right)\left(c+d\right)\right]\right\}\right.\\
+				&\left. {}-D\left[bc\right]+D\left[\left(-a+b\right)c\right]\right)\label{eq: generalIntegralOfE1}
+			\end{split}
+	\end{align}
+	
+	Note that -- as always when using the definition of $E_1$ from equation \eqref{eq: E1}  -- the arguments of the exponential integrals $E_1\left(x\right)$ and $D\left(x\right)$ must be positive:
+	
+	\begin{subequations}
+	\begin{align}
+		b\left(c+d\right)&>0\\
+		\left(-a+b\right)\left(c+d\right)&>0\\
+		bc&>0\label{eq: conditionForC1}\\
+		\left(-a+b\right)c&>0\label{eq: conditionForC2}
+	\end{align}
+	\end{subequations}
+	
+	We can see, that for the interesting special case $c=0$, the result is not defined: It violates the conditions \eqref{eq: conditionForC1} and \eqref{eq: conditionForC2}.
+	
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}$}
+	\label{subsubsec: generalIntegralOfE2}
 	
 	%TODO: compare with result in geller
 	
-	First integrate by parts using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}, then make use of the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$, which can be found in subsection \ref{subsubsec: specval02}:
+	The result can be obtained from the general case $Y\left(a, b, c, d\right)$ in the preceding subsection \ref{subsubsec: generalIntegralOfE1}, when setting $d=\infty$ and using the limit of subsection \ref{subsubsec: specval02}. But we can repeat the equivalent derivation of this special case $Y\left(a, b, c, \infty\right)=\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx$: First integrate by parts using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}, then make use of the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$, which can be found in subsection \ref{subsubsec: specval02}:
 	
 	\begin{align}
 		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=\left[\frac{e^{ax}}{a}E_1\left[b\left(x+c\right)\right]\right]^{\infty}_{x=0}-\int_{0}^{\infty}\frac{e^{ax}}{a}\left(-\frac{e^{-b\left(x+c\right)}}{x+c}\right)dx\\
 		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-x\left(b-a\right)}}{x+c}dx
 	\end{align}
 	
-	Now, first use substitution $x\left(b-a\right)=y$ with $\frac{dx}{dy}=\left(b-a\right)^{-1}$, then use substitution $y+c\left(b-a\right)=t$. In the last steps use the definition of $D\left(x\right)$ from eq. \eqref{eq: D}, which can be found in subsection \ref{subsec: D} on page \pageref{subsec: D}:
+	Now, first use substitution $x\left(b-a\right)=y$ with $\frac{dx}{dy}=\left(b-a\right)^{-1}$, then use substitution $y+c\left(b-a\right)=t$. In the last steps use the definition of $D\left(x\right)$ from eq. \eqref{eq: D}, which can be found in subsection \ref{subsubsec: D} on page \pageref{subsubsec: D}. In the end we arrive at the equation (A2c) found in the appendix of \cite{boer1990calc}. Provided positive $c$ the condition $a-b<0$ results from eq. \eqref{eq: int01Condition}:
 	
 	\begin{align}
 		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{\frac{y}{b-a}+c}\frac{dy}{b-a}\\
 		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{y+c\left(b-a\right)}dy\\
 		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{c\left(b-a\right)}^{\infty}\frac{e^{-t}e^{c\left(b-a\right)}}{t}dt\\	&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-ac}}{a}E_1\left[c\left(b-a\right)\right]\qquad\left(c\left(b-a\right)>0\right)\label{eq: int01Condition}\\
 		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+e^{-ac}e^{bc}e^{-c\left(b-a\right)}D\left[c\left(b-a\right)\right]\right\}\\
-		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}
+		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}\label{eq: generalIntegralOfE2}
 	\end{align}
 	
-	Arriving at the equation (A2c) found in the appendix of \cite{boer1990calc}. Provided positive $c$ the condition $a-b<0$ results from eq. \eqref{eq: int01Condition}.
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$}
+	\label{subsubsec: generalIntegralOfE3}
+	
+	Start with the integral representation $E_1\left(bx\right)=e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt$ from subsection \ref{subsubsec: intrep02}, which is only valid for $bx>0$. Then multiply the equation with $e^{ax}dx$, while integrating both sides from $x=0$ to infinity. After that just change the integration order:
+	
+	\begin{align}
+		\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx&=\int_{0}^{\infty}e^{ax}\left[e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt\right]dx\assume[b>0]\\
+		&=\int_{0}^{\infty}\frac{dt}{1+t}\int_{0}^{\infty}e^{-\left(-a+b+bt\right)x}dx\\
+		&=\int_{0}^{\infty}\frac{1}{1+t}\frac{1}{\left(-a+b+bt\right)}dt\assume[-a+b+bt>0]
+	\end{align}
+	
+	We can see the requirement $-a+b+bt>0$ yields $-a+b>0$ for the integration limit $t=0$, or equivalently $a<b$. On this result we want to use the substitution $\frac{1}{1+t}=z$. Then, in the next step, substitute $b-az=x$:
+	
+	\begin{align}
+		\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx&=\int_{1}^{0}z\frac{1}{\left(-a+\frac{b}{z}\right)}\left(-\frac{1}{z^2}dz\right)\\
+		&=\int_{0}^{1}\frac{1}{\left(b-az\right)}dz\\
+		&=\int_{b}^{b-a}\frac{1}{x}\left(-\frac{1}{a}dx\right)\\
+		&=-\frac{1}{a}\left[\ln{x}\right]^{b-a}_{x=b}\\
+		&=-\frac{1}{a}\left[\ln{\left(b-a\right)}-\ln{\left(b\right)}\right]\\
+		&=-\frac{1}{a}\ln{\left(1-\frac{a}{b}\right)}\assume[a<b, 0<b]\label{eq: generalIntegralOfE3}
+	\end{align}
+	
+	This end result is equation (A2d) from \cite{boer1990calc}. In terms of the $Y$-function this is $Y\left(a,b,0,\infty\right)$. For a more general derivation based on that of \autocite[73\psq]{schloemilch} see section \ref{appsec: moreGeneralDerivation1} in the appendix.
+	
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left(a-\frac{a}{b}\right)}\right)$}
+	
+	With a look at the preceding subsection we write:
+	
+	\begin{gather}
+		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx-\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx\label{eq: integralSplit1}
+	\end{gather}
+	
+	The solution to the first integral on the right side can be found in the preceding subsection \ref{subsubsec: generalIntegralOfE3}. We just have to solve the second integral, starting with integrating by parts. We utilize the derivative $\frac{d}{dx}E_1\left(bx\right)=-\frac{e^{-bx}}{x}$ from subsection \ref{subsubsec: specval_deriv} (for $bx>0$) and the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left(bx\right)=0$ from subsection \ref{subsubsec: specval02} (for $a>0, b>0, a<b$) again:
+	
+	\begin{align}
+		\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx&=\left[\frac{e^{ax}}{a}E_1\left(bx\right)\right]^{\infty}_{x=d}-\int_{d}^{\infty}\frac{e^{ax}}{a}\left(-\frac{e^{-bx}}{x}\right)dx\\
+		&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}\int_{d}^{\infty}\frac{e^{-x\left(b-a\right)}}{x}dx
+	\end{align}
+	
+	Now we just need to substitute $\frac{x}{d}=t$ and apply the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
+	
+	\begin{align}
+		\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}\int_{1}^{\infty}\frac{e^{-d\left(b-a\right)t}}{t}dt\\
+		&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}E_1\left[d\left(b-a\right)\right]
+	\end{align}
+	
+	Getting back to the entire integral in equation \eqref{eq: integralSplit1}, we can now use \eqref{eq: generalIntegralOfE3} from the previous subsection ($\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$) and get the final result. In the lest step we use the definition of the $D$-function from subsection \ref{subsubsec: D}:
+	
+	\begin{align}
+		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx&=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)+\frac{e^{ad}}{a}E_1\left[bd\right]-\frac{1}{a}E_1\left[d\left(b-a\right)\right]\\
+		&=\frac{1}{a}\left\{e^{ad}E_1\left[bd\right]-E_1\left[\left(-a+b\right)d\right]-\ln{\left(1-\frac{a}{b}\right)}\right\}\\
+		&=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left(a-\frac{a}{b}\right)}\right)\label{eq: generalIntegralOfE4}
+	\end{align}
+	
+	We have to apply the following restrictions:
+	
+	\begin{subequations}
+		\begin{align}
+			a&>0\label{eq: restrictions01}\\
+			b&>0\label{eq: restrictions02}\\
+			a&<b\label{eq: restrictions03}\\
+			bd&>0\overset{\eqref{eq: restrictions02}}{\Rightarrow}d>0\\
+			d\left(b-a\right)&>0\qquad\text{(redundant)}
+		\end{align}
+	\end{subequations}
+	
+	Equation \eqref{eq: generalIntegralOfE4} is equation (A2b) from the appendix of \cite{boer1990calc}. It is the special case $Y\left(a,b,0,d\right)\coloneqq{}W\left(a,b,d\right)$.
 	
 	\clearpage
 	\printbibliography
+	\clearpage
+	\appendix
+	
+	\section{Unused stuff}
+	
+		\subsection[Definition of Logarithmic Integral li(x)]{Definition of Logarithmic Integral $li\left(x\right)$}
+		\label{appsubsec: li}
+		
+			\begin{gather}
+			li\left(x\right)=\int_{0}^{x}\frac{1}{\ln{t}}dt\assume[x>0]\label{eq: li}
+			\end{gather}
+			
+			Note that for $x=1$ the integral diverges (because of the singularity of the integrand $\frac{1}{\ln{t}}$) and for $x>1$ the Cauchy principle value has to be employed to interpret the integral. From the definition of the exponential integral $E_1\left(x\right)$ in equation \eqref{eq: E1} one can see the following relation, when utilizing the substitution $t=e^{-w}$:
+			
+			\begin{align}
+			li\left(e^{-x}\right)&=\int_{0}^{e^{-x}}\frac{1}{\ln{t}}dt\\
+			&=\int_{\infty}^{x}\left(-\frac{1}{w}\right)\left(-e^{-w}dw\right)\\
+			&=-\int_{x}^{\infty}\frac{e^{-w}}{w}dw\\
+			&=-E_1\left(x\right)
+			\end{align}
+		
+		\subsection[Definition of Gamma function]{Definition of Gamma function $\Gamma\left(x\right)$}
+		\label{appsubsec: Gamma}
+		
+			\begin{gather}
+			\Gamma\left(x\right)=\int_{0}^{\infty}t^{x-1}e^{-t}dt\assume[x>0]\label{eq: Gamma}
+			\end{gather}
+		
+		\subsection{More general derivation of section \ref{subsubsec: generalIntegralOfE3}}
+		\label{appsec: moreGeneralDerivation1}
+		
+			This more general derivation of subsection \ref{subsubsec: generalIntegralOfE3} is based on that of \autocite[73\psq]{schloemilch}. Start with the integral representation $E_1\left(bx\right)=e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt$ from subsection \ref{subsubsec: intrep02}, which is only valid for $bx>0$. Then multiply the equation with $x^{\mu-1}e^{ax}dx$, while integrating both sides from $x=0$ to infinity:
+			
+			\begin{align}
+			\int_{0}^{\infty}x^{\mu-1}e^{ax}E_1\left(bx\right)dx&=\int_{0}^{\infty}x^{\mu-1}e^{ax}\left[e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt\right]dx\assume[b>0]\\
+			&=\int_{0}^{\infty}\frac{dt}{1+t}\int_{0}^{\infty}x^{\mu-1}e^{-\left(-a+b+bt\right)x}dx
+			\end{align}
+			
+			In the last step we just changed the integration order. Now we take a look at the integral over $x$. Using the substitution $kx=u$, and also taking advantage of the abbreviation $k=-a+b+bt$, we get:
+			
+			\begin{align}
+			\int_{0}^{\infty}x^{\mu-1}e^{-kx}dx&=\int_{0}^{\infty}\left(\frac{u}{k}\right)^{\mu-1}e^{-u}\left(\frac{1}{k}du\right)\assume[k>0]\\
+			&=k^{-\mu}\int_{0}^{\infty}u^{\mu-1}e^{-u}du\\
+			&=\frac{\Gamma\left(\mu\right)}{k^{\mu}}\assume[k>0, \mu>0]
+			\end{align}
+			
+			Here we used the definition of the Gamma function $\Gamma\left(\mu\right)$ from equation \eqref{eq: Gamma}, which is only valid for $\mu>0$. When applying the requirement $k>0$ to the abbreviation $k=-a+b+bt>0$, we can see this yields $-a+b>0$ for the integration limit $t=0$, or equivalently $a<b$. On this result we want to use the substitution $\frac{1}{1+t}=z$, i.e. $t=\frac{1}{z}-1$:
+			
+			\begin{align}
+			\int_{0}^{\infty}x^{\mu-1}e^{ax}E_1\left(bx\right)dx&=\Gamma\left(\mu\right)\int_{0}^{\infty}\frac{1}{\left(1+t\right)}\frac{1}{\left(-a+b\left(1+t\right)\right)^\mu}dt\\
+			&=\Gamma\left(\mu\right)\int_{1}^{0}z\frac{1}{\left(-a+\frac{b}{z}\right)^{\mu}}\left(-\frac{1}{z^2}dz\right)\\
+			&=\Gamma\left(\mu\right)\int_{0}^{1}\frac{z^{-1}}{\left(\frac{b}{z}-a\right)^{\mu}}\frac{z^{\mu}}{z^{\mu}}dz\\
+			&=\Gamma\left(\mu\right)\int_{0}^{1}\frac{z^{\mu-1}}{\left(b-az\right)^{\mu}}dz\assume[a<b, \mu>0]
+			\end{align}
+			
+			Now, we can just set $\mu=1$, use $\Gamma\left(1\right)=1$ and employ the substitution $b-az=x$ to get the desired end result of equation \eqref{eq: generalIntegralOfE3}:
+			
+			\begin{align}
+			\int_{0}^{\infty}e^{ax}E_1\left(bx\right)&=\Gamma\left(1\right)\int_{0}^{1}\frac{1}{b-az}dz\\
+			&=\int_{b}^{b-a}\frac{1}{x}\left(-\frac{1}{a}dx\right)\\
+			&=-\frac{1}{a}\left[\ln{x}\right]^{b-a}_{x=b}\\
+			&=-\frac{1}{a}\left[\ln{\left(b-a\right)}-\ln{\left(b\right)}\right]\\
+			&=-\frac{1}{a}\ln{\left(1-\frac{a}{b}\right)}\assume[a<b, 0<b]
+			\end{align}
 \end{document}

@@ -54,6 +54,7 @@
 	
 	\begin{enumerate}
 		\item All variables and parameters are considered real, if not stated otherwise.
+		\item The notation $\left[f\left(x\right)\right]_{x=a}^{b}$ means $f\left(b\right)-\left(a\right)$. In the same sense, if for example $b=\infty$, interpret as $\left[f\left(x\right)\right]_{x=a}^{\infty}=\lim_{x\rightarrow{}\infty}\left(f\left(x\right)\right)-f\left(a\right)$.
 	\end{enumerate}
 	
 	\subsection{Definitions}
@@ -137,27 +138,15 @@
 	\subsubsection[A limit of E1 as x approaches infinity]{$\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$}
 	\label{subsubsec: specval01}
 	
-	Start with integral representation of $E_1\left(x\right)$ found in subsection \ref{subsubsec: intrep01}:
+	We just take advantage of the asymptotic expansion found for example in \cite{dlmfAsymExpansion}:
 	
 	\begin{align}
-		\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]&=\lim_{x\rightarrow\infty}e^{-b\left(x+c\right)}\int_{0}^{1}\frac{1}{b\left(x+c\right)-\ln{t}}dt\\
-		&=e^{-bc}\int_{0}^{1}\left[\lim_{x\rightarrow\infty}\frac{e^{-bx}}{bx+bc-\ln{t}}\right]dt
+		E_1\left(x\right)&\sim{}e^{-x}\left(\frac{1}{x}-\frac{1!}{x^2}+\frac{2!}{x^3}-\frac{3!}{x^4}+\cdots\right)\\
+		\Rightarrow{}E_1\left[b\left(x+c\right)\right]&\sim{}e^{-bx}\left(\frac{e^{-bc}}{bx}-\frac{\left(1+bc\right)e^{-bc}}{b^2x^2}+\cdots\right)
 	\end{align}
 	
-	The perhaps suspected problem value of $\ln{t}\overset{t\rightarrow0}{\longrightarrow}-\infty$ in the limit is in fact no problem, when you rewrite it like the following:
+	Which converges to $0$ for $x\rightarrow\infty$, provided $b>0$.
 	
-	\begin{align}
-	\lim_{x\rightarrow\infty}\frac{e^{-bc}}{bx+bc-\ln{\frac{1}{x}}}&=\left(\lim_{x\rightarrow\infty}e^{-bc}\right)\cdot\left(\lim_{x\rightarrow\infty}\frac{1}{bx+bc-\ln{\frac{1}{x}}}\right)\\
-	&=0\cdot0\\
-	&=0\qquad\left(b\geq0\right)
-	\end{align}
-	
-	The desired limit follows. We have to take into account, that for $\ln{t}\overset{t\rightarrow1}{\longrightarrow}0$ the limit only exists for positive $b$:
-	
-	\begin{align}
-		\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]&=0\qquad\left(b>0\right)
-	\end{align}
-
 	\subsubsection[A limit of E1, involving the exponential function]{$\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$}
 	\label{subsubsec: specval02}
 	

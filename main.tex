@@ -134,33 +134,6 @@
 		&=\frac{-b}{-b\left(x+c\right)}\left[e^{-b\left(x+c\right)t}\right]^{\infty}_{t=1}\\
 		&=-\frac{e^{-b\left(x+c\right)}}{x+c}\qquad\left(b\left(x+c\right)>0\right)
 	\end{align}
-	
-	\subsubsection[A limit of E1 as x approaches infinity]{$\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$}
-	\label{subsubsec: specval01}
-	
-	We just take advantage of the asymptotic expansion found for example in \cite{dlmfAsymExpansion}:
-	
-	\begin{align}
-		E_1\left(x\right)&\sim{}e^{-x}\left(\frac{1}{x}-\frac{1!}{x^2}+\frac{2!}{x^3}-\frac{3!}{x^4}+\cdots\right)\\
-		\Rightarrow{}E_1\left[b\left(x+c\right)\right]&\sim{}e^{-bx}\left(\frac{e^{-bc}}{bx}-\frac{\left(1+bc\right)e^{-bc}}{b^2x^2}+\cdots\right)
-	\end{align}
-	
-	Which converges to $0$ for $x\rightarrow\infty$, provided $b>0$.
-	
-	\subsubsection[A limit of E1, involving the exponential function]{$\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$}
-	\label{subsubsec: specval02}
-	
-	Use subsection \ref{subsubsec: specval01} to evaluate the limit in the first step, $\lim_{x\rightarrow\infty}E_1\left[b\left(x+c\right)\right]=0$ (which is only valid for $b>0$), then use the rule of de L'Hospital:
-	
-	\begin{align}
-		\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]&=\lim_{x\rightarrow\infty}\frac{E_1\left[b\left(x+c\right)\right]}{e^{-ax}}\\
-		&=\text{\raisebox{-9pt}{\glqq}}\frac{0}{0}\text{\raisebox{9pt}{\grqq}}\qquad\left(a>0, b>0\right)\\
-		\lim_{x\rightarrow\infty}\frac{\frac{d}{dx}E_1\left[b\left(x+c\right)\right]}{\frac{d}{dx}e^{-ax}}&=\lim_{x\rightarrow\infty}\frac{-\left(\frac{e^{-b\left(x+c\right)}}{x+c}\right)}{-ae^{-ax}}\\
-		&=\frac{1}{a}\lim_{x\rightarrow\infty}\frac{e^{-b\left(x+c\right)+ax}}{x+c}\\
-		&=\frac{e^{-bc}}{a}\lim_{x\rightarrow\infty}\frac{e^{x\left(a-b\right)}}{x+c}\\
-		&=0\qquad\left(a>0, b>0, a-b<0\right)
-	\end{align}
-	
 
 	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
 	
@@ -246,27 +219,37 @@
 	
 	We can see, that for the interesting special case $c=0$, the result is not defined: It violates the conditions \eqref{eq: conditionForC1} and \eqref{eq: conditionForC2}.
 	
-	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}$}
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(-a+b\right)\right]\right\}$}
 	\label{subsubsec: generalIntegralOfE2}
 	
-	%TODO: compare with result in geller
-	
-	The result can be obtained from the general case $Y\left(a, b, c, d\right)$ in the preceding subsection \ref{subsubsec: generalIntegralOfE1}, when setting $d=\infty$ and using the limit of subsection \ref{subsubsec: specval02}. But we can repeat the equivalent derivation of this special case $Y\left(a, b, c, \infty\right)=\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx$: First integrate by parts using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}, then make use of the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left[b\left(x+c\right)\right]=0$, which can be found in subsection \ref{subsubsec: specval02}:
+	Start with the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
 	
 	\begin{align}
-		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=\left[\frac{e^{ax}}{a}E_1\left[b\left(x+c\right)\right]\right]^{\infty}_{x=0}-\int_{0}^{\infty}\frac{e^{ax}}{a}\left(-\frac{e^{-b\left(x+c\right)}}{x+c}\right)dx\\
-		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-x\left(b-a\right)}}{x+c}dx
+		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=\int_{0}^{\infty}e^{ax}\int_{1}^{\infty}\frac{e^{-b\left(x+c\right)t}}{t}dtx\\
+		&=\int_{1}^{\infty}dt\frac{e^{-bct}}{t}\int_{0}^{\infty}dxe^{x\left(a-bt\right)}\\
+		&=\int_{1}^{\infty}dt\frac{e^{-bct}}{t}\left(-\frac{1}{a-bt}\right)\assume[a-bt<0]\label{eq: restrictionOfGeneralIntegralOfE2}\\
+		&=-\int_{1}^{\infty}dt\frac{e^{-bct}}{a}\frac{a-bt+bt}{t\left(a-bt\right)}\\
+		&=-\int_{1}^{\infty}dt\frac{e^{-bct}}{a}\left(\frac{1}{t}+\frac{b}{a-bt}\right)
 	\end{align}
 	
-	Now, first use substitution $x\left(b-a\right)=y$ with $\frac{dx}{dy}=\left(b-a\right)^{-1}$, then use substitution $y+c\left(b-a\right)=t$. In the last steps use the definition of $D\left(x\right)$ from eq. \eqref{eq: D}, which can be found in subsection \ref{subsubsec: D} on page \pageref{subsubsec: D}. In the end we arrive at the equation (A2c) found in the appendix of \cite{boer1990calc}. Provided positive $c$ the condition $a-b<0$ results from eq. \eqref{eq: int01Condition}:
+	The first term in the last equation we recognize as $E_1\left(bc\right)$. For the second summand we first apply the substitution $-\left(a-bt\right)=y$ and then $\frac{y}{b-a}=x$ to also get an exponential integral:
 	
 	\begin{align}
-		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{\frac{y}{b-a}+c}\frac{dy}{b-a}\\
-		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{0}^{\infty}\frac{e^{-y}}{y+c\left(b-a\right)}dy\\
-		&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-bc}}{a}\int_{c\left(b-a\right)}^{\infty}\frac{e^{-t}e^{c\left(b-a\right)}}{t}dt\\	&=-\frac{E_1\left(bc\right)}{a}+\frac{e^{-ac}}{a}E_1\left[c\left(b-a\right)\right]\qquad\left(c\left(b-a\right)>0\right)\label{eq: int01Condition}\\
-		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+e^{-ac}e^{bc}e^{-c\left(b-a\right)}D\left[c\left(b-a\right)\right]\right\}\\
-		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(b-a\right)\right]\right\}\label{eq: generalIntegralOfE2}
+		\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx&=-\frac{1}{a}\left\{E_1\left[bc\right]-\int_{b-a}^{\infty}\frac{be^{-bc\frac{a+y}{b}}}{y}\frac{dy}{b}\right\}\\
+		&=-\frac{1}{a}\left\{E_1\left[bc\right]-e^{-ac}\int_{b-a}^{\infty}\frac{e^{-cy}}{y}dy\right\}\\
+		&=-\frac{1}{a}\left\{E_1\left[bc\right]-e^{-ac}\int_{1}^{\infty}\frac{e^{-c\left(b-a\right)x}}{\left(b-a\right)x}\left(b-a\right)dx\right\}\\
+		&=-\frac{1}{a}\left\{E_1\left[bc\right]-e^{-ac}E_1\left[c\left(-a+b\right)\right]\right\}\\
+		&=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(-a+b\right)\right]\right\}\label{eq: generalIntegralOfE2}
 	\end{align}
+	
+	In the end we arrive at the equation (A2c) found in the appendix of \cite{boer1990calc}. We have to comply to the following restrictions:
+	
+	\begin{subequations}
+		\begin{gather}
+			a-bt<0\overset{\eqref{eq: restrictionOfGeneralIntegralOfE2}}{\Rightarrow}a-b<0\Rightarrow{}a<b\\
+			bc>0
+		\end{gather}
+	\end{subequations}
 	
 	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$}
 	\label{subsubsec: generalIntegralOfE3}
@@ -290,51 +273,44 @@
 		&=-\frac{1}{a}\ln{\left(1-\frac{a}{b}\right)}\assume[a<b, 0<b]\label{eq: generalIntegralOfE3}
 	\end{align}
 	
-	This end result is equation (A2d) from \cite{boer1990calc}. In terms of the $Y$-function this is $Y\left(a,b,0,\infty\right)$. For a more general derivation based on that of \autocite[73\psq]{schloemilch} see section \ref{appsec: moreGeneralDerivation1} in the appendix.
+	This end result is equation (A2d) from \cite{boer1990calc}. In terms of the $Y$-function this is $Y\left(a,b,0,\infty\right)$. For a more general derivation based on that of \autocite[73\psq]{schloemilch} see section \ref{appsec: moreGeneralDerivation1} in the appendix. The equation can also be found as equation (R10) in \cite{sherman}.
 	
-	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left(a-\frac{a}{b}\right)}\right)$}
+	\subsubsection[A integral of E1, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left[1-\frac{a}{b}\right]}\right)$}
 	
-	With a look at the preceding subsection we write:
-	
-	\begin{gather}
-		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx-\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx\label{eq: integralSplit1}
-	\end{gather}
-	
-	The solution to the first integral on the right side can be found in the preceding subsection \ref{subsubsec: generalIntegralOfE3}. We just have to solve the second integral, starting with integrating by parts. We utilize the derivative $\frac{d}{dx}E_1\left(bx\right)=-\frac{e^{-bx}}{x}$ from subsection \ref{subsubsec: specval_deriv} (for $bx>0$) and the limit $\lim_{x\rightarrow\infty}e^{ax}E_1\left(bx\right)=0$ from subsection \ref{subsubsec: specval02} (for $a>0, b>0, a<b$) again:
+	To start we plug in the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
 	
 	\begin{align}
-		\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx&=\left[\frac{e^{ax}}{a}E_1\left(bx\right)\right]^{\infty}_{x=d}-\int_{d}^{\infty}\frac{e^{ax}}{a}\left(-\frac{e^{-bx}}{x}\right)dx\\
-		&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}\int_{d}^{\infty}\frac{e^{-x\left(b-a\right)}}{x}dx
+		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx&=\int_{0}^{d}e^{ax}\left(\int_{1}^{\infty}\frac{e^{-bxt}}{t}dt\right)dx\\
+		&=\int_{1}^{\infty}\frac{dt}{t}\int_{0}^{d}dxe^{\left(a-bt\right)x}\\
+		&=\int_{1}^{\infty}\frac{dt}{t}\left(\frac{1}{a-bt}e^{\left(a-bt\right)d}-\frac{1}{a-bt}\right)\assume[a<b]\\
+		&=\int_{1}^{\infty}\frac{dt}{a}\frac{a}{t\left(a-bt\right)}e^{\left(a-bt\right)d}-\int_{1}^{\infty}dt\frac{1}{t\left(a-bt\right)}\\
+		&=\int_{1}^{\infty}\frac{dt}{a}\frac{a-bt+bt}{t\left(a-bt\right)}e^{\left(a-bt\right)d}-\int_{1}^{\infty}dt\frac{1}{t\left(a-bt\right)}\\
+		&=\int_{1}^{\infty}\frac{dt}{a}\left(\frac{1}{t}+\frac{b}{a-bt}\right)e^{\left(a-bt\right)d}-\int_{1}^{\infty}dt\frac{1}{t\left(a-bt\right)}\\
+		&=\frac{e^{ad}}{a}\int_{1}^{\infty}dt\frac{e^{-dbt}}{t}+\frac{1}{a}\int_{1}^{\infty}dt\frac{be^{\left(a-bt\right)d}}{a-bt}-\int_{1}^{\infty}dt\frac{1}{t\left(a-bt\right)}
 	\end{align}
 	
-	Now we just need to substitute $\frac{x}{d}=t$ and apply the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
+	Looking at the first term in the last equation we see the integral representation of $E_1\left(bd\right)$. To simplify to second summand we first apply the substitution $-\left(a-bt\right)=y$ and after applying $\frac{y}{b-a}=x$ see the integral representation of $E_1\left[d\left(b-a\right)\right]$. And finally for the last term in the equation we use the substitution $\frac{1}{a-bt}=z$ and then apply $1-az=w$:
 	
 	\begin{align}
-		\int_{d}^{\infty}e^{ax}E_1\left(bx\right)dx&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}\int_{1}^{\infty}\frac{e^{-d\left(b-a\right)t}}{t}dt\\
-		&=-\frac{e^{ad}}{a}E_1\left(bd\right)+\frac{1}{a}E_1\left[d\left(b-a\right)\right]
-	\end{align}
-	
-	Getting back to the entire integral in equation \eqref{eq: integralSplit1}, we can now use \eqref{eq: generalIntegralOfE3} from the previous subsection ($\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$) and get the final result. In the lest step we use the definition of the $D$-function from subsection \ref{subsubsec: D}:
-	
-	\begin{align}
-		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx&=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)+\frac{e^{ad}}{a}E_1\left[bd\right]-\frac{1}{a}E_1\left[d\left(b-a\right)\right]\\
-		&=\frac{1}{a}\left\{e^{ad}E_1\left[bd\right]-E_1\left[\left(-a+b\right)d\right]-\ln{\left(1-\frac{a}{b}\right)}\right\}\\
-		&=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left(a-\frac{a}{b}\right)}\right)\label{eq: generalIntegralOfE4}
+		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx&=\frac{e^{ad}}{a}E_1\left[bd\right]+\frac{1}{a}\int_{b-a}^{\infty}dy\frac{e^{-yd}}{-y}-\int_{\left(a-b\right)^{-1}}^{0}\frac{b}{a-\frac{1}{z}}\frac{z}{b}\frac{dz}{z^2}\\
+		&=\frac{e^{ad}}{a}E_1\left[bd\right]-\frac{1}{a}\int_{1}^{\infty}dx\frac{e^{-d\left(b-a\right)x}}{\left(b-a\right)x}\left(b-a\right)-\int_{1}^{1-\frac{a}{a-b}}\frac{1}{w}\left(-\frac{dw}{a}\right)\\
+		&=\frac{e^{ad}}{a}E_1\left[bd\right]-\frac{1}{a}E_1\left[\left(b-a\right)d\right]+\frac{1}{a}\ln{\left[1-\frac{a}{a-b}\right]}\\
+		&=\frac{e^{ad}}{a}E_1\left[bd\right]-\frac{1}{a}E_1\left[\left(-a+b\right)d\right]+\frac{1}{a}\ln{\left[\frac{a-b-a}{a-b}\right]}\\
+		&=\frac{1}{a}\left\{e^{ad}E_1\left[bd\right]-E_1\left[\left(-a+b\right)d\right]-\ln{\left[-\frac{a-b}{b}\right]}\right\}\\
+		&=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left[1-\frac{a}{b}\right]}\right)\label{eq: generalIntegralOfE4}
 	\end{align}
 	
 	We have to apply the following restrictions:
 	
 	\begin{subequations}
 		\begin{align}
-			a&>0\label{eq: restrictions01}\\
-			b&>0\label{eq: restrictions02}\\
-			a&<b\label{eq: restrictions03}\\
-			bd&>0\overset{\eqref{eq: restrictions02}}{\Rightarrow}d>0\\
-			d\left(b-a\right)&>0\qquad\text{(redundant)}
+			b&>0\label{eq: restrictions01}\\
+			b&>a\label{eq: restrictions02}\\
+			bd&>0\overset{\eqref{eq: restrictions02}}{\Rightarrow}d>0
 		\end{align}
 	\end{subequations}
 	
-	Equation \eqref{eq: generalIntegralOfE4} is equation (A2b) from the appendix of \cite{boer1990calc}. It is the special case $Y\left(a,b,0,d\right)\coloneqq{}W\left(a,b,d\right)$.
+	Equation \eqref{eq: generalIntegralOfE4} is equation (A2b) from the appendix of \cite{boer1990calc}. It is the special case $Y\left(a,b,0,d\right)\coloneqq{}W\left(a,b,d\right)$. It can also be found as equation (R11) and (R22) of \cite{sherman}.
 	
 	\clearpage
 	\printbibliography

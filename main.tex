@@ -91,7 +91,7 @@
 	
 	\begin{align}
 		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\\
-		&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt
+		&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt\label{eq: integralrepresentation1}
 	\end{align}
 	
 	\subsubsection[A integral representation not involving exp(x) in the integrand]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
@@ -119,7 +119,17 @@
 		&=\int_{0}^{\infty}\frac{e^{-x\left(t+1\right)}}{x\left(t+1\right)}\left(xdt\right)\\
 		&=e^{-x}\int_{0}^{\infty}\frac{e^{-xt}}{t+1}dt
 	\end{align}
+
+	\subsubsection[A integral representation involving integration over an angle]{$E_1\left(x\right)=\int_{0}^{\frac{\pi}{2}}\tan{\left(\alpha\right)}e^{-\frac{x}{\cos{\alpha}}}d\alpha$, this is eq. (2a) from \cite{boer1990calc}}
+
+	Starting with the representation of equation \eqref{eq: integralrepresentation1} and using the substitution $t=\frac{1}{\cos\alpha}$ we immediately arrive at the result:
 	
+	\begin{align}
+		E_1\left(x\right)&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt\\
+		&=\int_{0}^{\frac{\pi}{2}}\cos{\left(\alpha\right)}e^{-\frac{x}{\cos\alpha}}\frac{\tan\alpha}{\cos\alpha}d\alpha\\
+		&=\int_{0}^{\frac{\pi}{2}}\tan{\left(\alpha\right)}e^{-\frac{x}{\cos{\alpha}}}d\alpha
+	\end{align}
+
 	\subsection{Special Values}
 	
 	\subsubsection[A derivative of E1]{$\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$}

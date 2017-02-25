@@ -336,10 +336,35 @@
 		\mathcal{PV}\left[\int_{x}^{\infty}\frac{e^{-w}}{w}dw\right]&=\lim_{\epsilon\to{}0^{+}}\left[\int_{x}^{-\epsilon}\frac{e^{-w}}{w}dw+\int_{\epsilon}^{\infty}\frac{e^{-w}}{w}dw\right]
 	\end{align}
 
-	This converges for negative\footnote{For positive values of $x$ this converges as well and the limit is the familiar exponential integral $E_1\left(x\right)$.} values of $x$ and can readily be numerically evaluated:
+	Let us now assume a negative argument $x<0$. Then we can define $a=-x>0$ and split up the integral. For positive values of $a$ the Cauchy principal value converges and the limit is just the exponential integral $E_1\left(a\right)$:
+	
+	\begin{align}
+		E_1\left(x=-a\right)=\mathcal{PV}\left[\int_{-a}^{\infty}\frac{e^{-w}}{w}dw\right]&=\mathcal{PV}\left[\int_{-a}^{a}\frac{e^{-w}}{w}dw+\int_{a}^{\infty}\frac{e^{-w}}{w}dw\right]\\
+		&=\mathcal{PV}\left[\int_{-a}^{a}\frac{e^{-w}}{w}dw\right]+E_1\left(a\right)
+	\end{align}
+
+	The remaining Cauchy principal value can be readily evaluated (see e.g. \cite{rabinowitz}), when we split the integrand into an odd and an even part:
+
 	\begin{gather}
-		E_1\left(-1\right)\overset{\mathcal{PV}}{\approx}-1.89512
+		op\left(w\right)=\frac{1}{2}\left[f\left(w\right)-f\left(-w\right)\right]\\
+		ep\left(w\right)=\frac{1}{2}\left[f\left(w\right)+f\left(-w\right)\right]\\
+		f\left(w\right)=\frac{e^{-w}}{w}=op\left(w\right)+ep\left(w\right)
 	\end{gather}
+
+	Then the odd part will vanish inside the integral, because we integrate over an symmetric interval $\int_{-a}^{a}op\left(w\right)dw=0$. We can also exploit the behaviour of even functions in the same symmetric interval $\int_{-a}^{a}ep\left(w\right)dw=2\cdot\int_{0}^{a}ep\left(w\right)dw$:
+
+	\begin{align}
+		\mathcal{PV}\left[\int_{-a}^{a}\frac{e^{-w}}{w}dw\right]&=\mathcal{PV}\left[\int_{-a}^{a}op\left(w\right)+ep\left(w\right)dw\right]\\
+		&=2\cdot\mathcal{PV}\left[\int_{0}^{a}ep\left(w\right)dw\right]\\
+		&=\mathcal{PV}\left[\int_{0}^{a}\left(\frac{e^{-w}}{w}-\frac{e^w}{w}\right)dw\right]
+	\end{align}
+
+	The last integral converges (even without the Cauchy principal value), and can easily be numerically integrated. For example:
+	
+	\begin{align}
+		E_1\left(-1\right)&=\int_{0}^{1}\left(\frac{e^{-w}}{w}-\frac{e^w}{w}\right)dw+E_1\left(1\right)\\
+		&\approx-1.89512
+	\end{align}
 
 	\clearpage
 	\printbibliography

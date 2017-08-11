@@ -59,20 +59,20 @@
 
 	\subsection{Definitions}
 
-	\subsubsection[Definition of Exponential Integral $E_1\left(x\right)$]{Definition of Exponential Integral $E_1\left(x\right)$}
+	\subsubsection[Definition of Exponential Integral]{Definition of Exponential Integral $E_1\left(x\right)$}
 
 	\begin{gather}
 		E_1\left(x\right)=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\label{eq: E1}
 	\end{gather}
 
-	\subsubsection{Definition of $D\left(x\right)$}
+	\subsubsection[Definition of D(x)]{Definition of $D\left(x\right)$}
 	\label{subsubsec: D}
 
 	\begin{gather}
 		D\left(x\right)=e^xE_1\left(x\right)\assume[x>0]\label{eq: D}
 	\end{gather}
 
-	\subsubsection{Definition of $Y\left(a, b, c, d\right)$}
+	\subsubsection[Definition of Y(a,b,c,d)]{Definition of $Y\left(a, b, c, d\right)$}
 
 	\begin{gather}
 		Y\left(a, b, c, d\right)=\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx\assume[d>0,b>0,c>0]\label{eq: Y}
@@ -80,7 +80,7 @@
 
 	\clearpage
 
-	\section[Exponential Integral $E_1\left(x\right)$]{Exponential Integral $E_1\left(x\right)$}
+	\section[Exponential Integral]{Exponential Integral $E_1\left(x\right)$}
 
 	\subsection{Integral Representations}
 
@@ -94,7 +94,7 @@
 		&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt\label{eq: integralrepresentation1}
 	\end{align}
 
-	\subsubsection[A integral representation not involving $\text{exp}\left(x\right)$ in the integrand]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
+	\subsubsection[A integral representation not involving exp(x) in the integrand]{$E_1\left(x\right)=e^{-x}\int_{0}^{1}\frac{1}{x-\ln{t}}dt$, source is eq. (4) in sec. 3.3 of \cite{geller1969table}}
 	\label{subsubsec: intrep01}
 	\begin{align}
 		E_1\left(x\right)&=\int_{x}^{\infty}\frac{e^{-w}}{w}dw\assume[x>0]\\
@@ -132,7 +132,7 @@
 
 	\subsection{Special Values}
 
-	\subsubsection[A derivative of $E_1\left(x\right)$]{$\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$}
+	\subsubsection[A derivative of E1(x)]{$\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$}
 	\label{subsubsec: specval_deriv}
 
 	Start with integral representation of $E_1\left(x\right)$ found in subsection \ref{subsubsec: def01}:
@@ -145,7 +145,7 @@
 		&=-\frac{e^{-b\left(x+c\right)}}{x+c}\qquad\left(b\left(x+c\right)>0\right)
 	\end{align}
 
-	\subsection[Integrals involving $E_1\left(x\right)$]{Integrals involving $E_1\left(x\right)$}
+	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
 
 	\begin{table}[h]
 		\centering
@@ -178,7 +178,7 @@
 		\int_{a}^{b}\frac{e^{-x}}{x}dx=E_1\left(a\right)-E_1\left(b\right)\qquad\left(a\neq{}b, ab>0\right)
 	\end{gather}
 
-	\subsubsection[A integral of $E_1\left(x\right)$, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{e^{-bc}}{a}\left(e^{\left(a-b\right)d}\left\{D\left[b\left(c+d\right)\right]-D\left[\left(-a+b\right)\left(c+d\right)\right]\right\}-D\left[bc\right]+D\left[\left(-a+b\right)c\right]\right)$}
+	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{e^{-bc}}{a}\left(e^{\left(a-b\right)d}\left\{D\left[b\left(c+d\right)\right]-D\left[\left(-a+b\right)\left(c+d\right)\right]\right\}-D\left[bc\right]+D\left[\left(-a+b\right)c\right]\right)$}
 	\label{subsubsec: generalIntegralOfE1}
 
 	This is the general case of $Y\left(a, b, c, d\right)=\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx$, found in \cite{boer1990calc}. Special cases, e.g. $c=0$ are considered in the following subsections. Now, first integrate by parts, using the derivative $\frac{d}{dx}E_1\left[b\left(x+c\right)\right]=-\frac{e^{-b\left(x+c\right)}}{x+c}$ from subsection \ref{subsubsec: specval_deriv}:
@@ -229,7 +229,7 @@
 
 	We can see, that for the interesting special case $c=0$, the result is not defined: It violates the conditions \eqref{eq: conditionForC1} and \eqref{eq: conditionForC2}.
 
-	\subsubsection[A integral of $E_1\left(x\right)$, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(-a+b\right)\right]\right\}$}
+	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx=\frac{1}{a}e^{-bc}\left\{-D\left[bc\right]+D\left[c\left(-a+b\right)\right]\right\}$}
 	\label{subsubsec: generalIntegralOfE2}
 
 	Start with the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
@@ -261,7 +261,7 @@
 		\end{gather}
 	\end{subequations}
 
-	\subsubsection[A integral of $E_1\left(x\right)$, involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$}
+	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$}
 	\label{subsubsec: generalIntegralOfE3}
 
 	Start with the integral representation $E_1\left(bx\right)=e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt$ from subsection \ref{subsubsec: intrep02}, which is only valid for $bx>0$. Then multiply the equation with $e^{ax}dx$, while integrating both sides from $x=0$ to infinity. After that just change the integration order:
@@ -285,7 +285,7 @@
 
 	This end result is equation (A2d) from \cite{boer1990calc}. In terms of the $Y$-function this is $Y\left(a,b,0,\infty\right)$. For a more general derivation based on that of \autocite[73\psq]{schloemilch} see section \ref{appsec: moreGeneralDerivation1} in the appendix. The equation can also be found as equation (R10) in \cite{sherman}.
 
-	\subsubsection[A integral of $E_1\left(x\right)$, involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left[1-\frac{a}{b}\right]}\right)$}
+	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left[1-\frac{a}{b}\right]}\right)$}
 
 	To start we plug in the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
 
@@ -299,7 +299,7 @@
 		&=\frac{e^{ad}}{a}\int_{1}^{\infty}dt\frac{e^{-dbt}}{t}+\frac{1}{a}\int_{1}^{\infty}dt\frac{be^{\left(a-bt\right)d}}{a-bt}-\int_{1}^{\infty}dt\frac{1}{t\left(a-bt\right)}
 	\end{align}
 
-	Looking at the first term in the last equation we see the integral representation of $E_1\left(bd\right)$. To simplify to second summand we first apply the substitution $-\left(a-bt\right)=y$ and after applying $\frac{y}{b-a}=x$ see the integral representation of $E_1\left[d\left(b-a\right)\right]$. And finally for the last term in the equation we use the substitution $\frac{1}{a-bt}=z$ and then apply $1-az=w$:
+	Looking at the first term in the last equation we see the integral representation of $E_1\left(bd\right)$. To simplify the second summand we first apply the substitution $-\left(a-bt\right)=y$ and after applying $\frac{y}{b-a}=x$ see the integral representation of $E_1\left[d\left(b-a\right)\right]$. And finally for the last term in the equation we use the substitution $\frac{1}{a-bt}=z$ and then apply $1-az=w$:
 
 	\begin{align}
 		\int_{0}^{d}e^{ax}E_1\left(bx\right)dx&=\frac{e^{ad}}{a}E_1\left[bd\right]+\frac{1}{a}\int_{b-a}^{\infty}dy\frac{e^{-yd}}{-y}-\int_{\left(a-b\right)^{-1}}^{0}\frac{b}{a-\frac{1}{z}}\frac{z}{b}\frac{dz}{z^2}\\
@@ -373,7 +373,7 @@
 
 	\section{Collection of unused definitions and derivations}
 
-		\subsection{Definition of Logarithmic Integral $li\left(x\right)$}
+		\subsection[Definition of Logarithmic Integral]{Definition of Logarithmic Integral $li\left(x\right)$}
 		\label{appsubsec: li}
 
 			\begin{gather}
@@ -389,7 +389,7 @@
 				&=-E_1\left(x\right)
 			\end{align}
 
-		\subsection{Definition of Gamma function $\Gamma\left(x\right)$}
+		\subsection[Definition of Gamma function]{Definition of Gamma function $\Gamma\left(x\right)$}
 		\label{appsubsec: Gamma}
 
 			\begin{gather}

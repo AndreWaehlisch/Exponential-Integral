@@ -121,6 +121,7 @@
 	\end{align}
 
 	\subsubsection[A integral representation involving integration over an angle]{$E_1\left(x\right)=\int_{0}^{\frac{\pi}{2}}\tan{\left(\alpha\right)}e^{-\frac{x}{\cos{\alpha}}}d\alpha$, this is eq. (2a) from \cite{boer1990calc}}
+	\label{subsubsec: integralRep_angle}
 
 	Starting with the representation of equation \eqref{eq: integralrepresentation1} and using the substitution $t=\frac{1}{\cos\alpha}$ we immediately arrive at the result:
 
@@ -145,6 +146,30 @@
 		&=-\frac{e^{-b\left(x+c\right)}}{x+c}\qquad\left(b\left(x+c\right)>0\right)
 	\end{align}
 
+	\subsubsection{A shifted integration range}
+	\label{subsubsec: shifted_intrange}
+	
+	Starting with the integral representation of $E_1\left(x\right)$ from subsection \ref{subsubsec: integralRep_angle} we don't want to integrate from $0$ to $\frac{\pi}{2}$, but instead only up to $\frac{\pi}{2}-\psi$, with the condition $\psi\in\left]0,\frac{\pi}{2}\right[$. The first step is to undo the substitution $t=\frac{1}{\cos\alpha}$ and use $\cos\left(\frac{\pi}{2}-\psi\right)=\sin\psi$:
+	
+	\begin{gather}
+		\int_{0}^{\frac{\pi}{2}-\psi}\tan\left(\alpha\right)e^{-\frac{x}{\cos\alpha}}d\alpha=\int_{1}^{\frac{1}{\sin\psi}}\frac{e^{-xt}}{t}dt\assume[0<\psi<\frac{\pi}{2}]\label{eq: shiftedIntRange1}
+	\end{gather}
+	
+	Now, notice that if $0<\psi<\frac{\pi}{2}$ then $\infty>\frac{1}{\sin\psi}>1$. Split the first integral representation of $E_1\left(x\right)$ from equation \eqref{eq: integralrepresentation1} up into two summands:
+	
+	\begin{gather}
+		E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt=\int_{1}^{\frac{1}{\sin\psi}}\frac{e^{-xt}}{t}dt+\int_{\frac{1}{\sin\psi}}^{\infty}\frac{e^{-xt}}{t}dt\label{eq: shiftedIntRange2}
+	\end{gather}
+	
+	The first term on the right-hand side is equation \eqref{eq: shiftedIntRange1} from above. Using the substitution $xt=r$ notice that the second term is the exponential integral again, but with a different argument:
+	
+	\begin{align}
+		\int_{0}^{\frac{\pi}{2}-\psi}\tan\left(\alpha\right)e^{-\frac{x}{\cos\alpha}}d\alpha&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt-\int_{\frac{1}{\sin\psi}}^{\infty}\frac{e^{-xt}}{t}dt\\
+		&=E_1\left(x\right)-\int_{\frac{x}{\sin\psi}}^{\infty}\frac{e^{-r}}{r}dr\\
+		&=E_1\left(x\right)-E_1\left(\frac{x}{\sin{x}}\right)\\
+		&=E_1\left(x\right)-E_1\left(x\csc\psi\right)
+	\end{align}
+	
 	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
 
 	\begin{table}[h]

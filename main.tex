@@ -176,15 +176,15 @@
 		\centering
 		\begin{tabular}{cccc}
 			\toprule
-			Integral & $Y$-representation & Location & Location in \cite{boer1990calc}\\
+			Integral & $Y$-representation & Location this work & Location in \cite{boer1990calc}\\
 			\midrule
-			$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,d\right)$ & \eqref{eq: generalIntegralOfE1}, p. \pageref{eq: generalIntegralOfE1} & eq. (A2a)\\
-			$\int_{0}^{d}e^{ax}E_1\left[bd\right]dx$ & $Y\left(a,b,0,d\right)$ & \eqref{eq: generalIntegralOfE4}, p. \pageref{eq: generalIntegralOfE4} & eq. (A2b)\\
-			$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,\infty\right)$ & \eqref{eq: generalIntegralOfE2}, p. \pageref{eq: generalIntegralOfE2} & eq. (A2c)\\
-			$\int_{0}^{\infty}e^{ax}E_1\left[bx\right]dx$ & $Y\left(a,b,0,\infty\right)$ & \eqref{eq: generalIntegralOfE3}, p. \pageref{eq: generalIntegralOfE3} & eq. (A2d)\\
+			$\int_{0}^{d}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,d\right)$ & eq. \eqref{eq: generalIntegralOfE1}, p. \pageref{eq: generalIntegralOfE1} & eq. (A2a)\\
+			$\int_{0}^{d}e^{ax}E_1\left[bd\right]dx$ & $Y\left(a,b,0,d\right)$ & eq. \eqref{eq: generalIntegralOfE4}, p. \pageref{eq: generalIntegralOfE4} & eq. (A2b)\\
+			$\int_{0}^{\infty}e^{ax}E_1\left[b\left(x+c\right)\right]dx$ & $Y\left(a,b,c,\infty\right)$ & eq. \eqref{eq: generalIntegralOfE2}, p. \pageref{eq: generalIntegralOfE2} & eq. (A2c)\\
+			$\int_{0}^{\infty}e^{ax}E_1\left[bx\right]dx$ & $Y\left(a,b,0,\infty\right)$ & eq. \eqref{eq: generalIntegralOfE3}, p. \pageref{eq: generalIntegralOfE3} & eq. (A2d)\\
 			\bottomrule
 		\end{tabular}
-		\caption{Table of integrals encountered in \cite{boer1990calc}}
+		\caption{Integrals encountered in \cite{boer1990calc}}
 		\label{tab: tableOfIntegrals}
 	\end{table}
 
@@ -289,7 +289,7 @@
 	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx=-\frac{1}{a}\ln\left(1-\frac{a}{b}\right)$}
 	\label{subsubsec: generalIntegralOfE3}
 
-	Start with the integral representation $E_1\left(bx\right)=e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt$ from subsection \ref{subsubsec: intrep02}, which is only valid for $bx>0$. Then multiply the equation with $e^{ax}dx$, while integrating both sides from $x=0$ to infinity. After that just change the integration order:
+	Start with the integral representation $E_1\left(bx\right)=e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt$ from subsection \ref{subsubsec: intrep02}, which is only valid for $bx>0$. Then multiply the equation with $e^{ax}dx$, while integrating both sides from $x=0$ to $\infty$. After that just change the integration order:
 
 	\begin{align}
 		\int_{0}^{\infty}e^{ax}E_1\left(bx\right)dx&=\int_{0}^{\infty}e^{ax}\left[e^{-bx}\int_{0}^{\infty}\frac{e^{-bxt}}{t+1}dt\right]dx\assume[b>0]\\
@@ -311,6 +311,7 @@
 	This end result is equation (A2d) from \cite{boer1990calc}. In terms of the $Y$-function this is $Y\left(a,b,0,\infty\right)$. For a more general derivation based on that of \autocite[73\psq]{schloemilch} see section \ref{appsec: moreGeneralDerivation1} in the appendix. The equation can also be found as equation (R10) in \cite{sherman}.
 
 	\subsubsection[A integral of E1(x), involving the exponential function]{$\int_{0}^{d}e^{ax}E_1\left(bx\right)dx=\frac{1}{a}\left(e^{\left(a-b\right)d}\left\{D\left[bd\right]-D\left[\left(-a+b\right)d\right]\right\}-\ln{\left[1-\frac{a}{b}\right]}\right)$}
+	\label{subsubsec: generalIntegralOfE4}
 
 	To start we plug in the integral representation $E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt$ from subsection \ref{subsubsec: def01}:
 

@@ -148,28 +148,40 @@
 
 	\subsubsection{A shifted integration range}
 	\label{subsubsec: shifted_intrange}
-	
+
 	Starting with the integral representation of $E_1\left(x\right)$ from subsection \ref{subsubsec: integralRep_angle} we don't want to integrate from $0$ to $\frac{\pi}{2}$, but instead only up to $\frac{\pi}{2}-\psi$, with the condition $\psi\in\left]0,\frac{\pi}{2}\right[$. The first step is to undo the substitution $t=\frac{1}{\cos\alpha}$ and use $\cos\left(\frac{\pi}{2}-\psi\right)=\sin\psi$:
-	
+
 	\begin{gather}
 		\int_{0}^{\frac{\pi}{2}-\psi}\tan\left(\alpha\right)e^{-\frac{x}{\cos\alpha}}d\alpha=\int_{1}^{\frac{1}{\sin\psi}}\frac{e^{-xt}}{t}dt\assume[0<\psi<\frac{\pi}{2}]\label{eq: shiftedIntRange1}
 	\end{gather}
-	
+
 	Now, notice that if $0<\psi<\frac{\pi}{2}$ then $\infty>\frac{1}{\sin\psi}>1$. Split the first integral representation of $E_1\left(x\right)$ from equation \eqref{eq: integralrepresentation1} up into two summands:
-	
+
 	\begin{gather}
 		E_1\left(x\right)=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt=\int_{1}^{\frac{1}{\sin\psi}}\frac{e^{-xt}}{t}dt+\int_{\frac{1}{\sin\psi}}^{\infty}\frac{e^{-xt}}{t}dt\label{eq: shiftedIntRange2}
 	\end{gather}
-	
+
 	The first term on the right-hand side is equation \eqref{eq: shiftedIntRange1} from above. Using the substitution $xt=r$ notice that the second term is the exponential integral again, but with a different argument:
-	
+
 	\begin{align}
 		\int_{0}^{\frac{\pi}{2}-\psi}\tan\left(\alpha\right)e^{-\frac{x}{\cos\alpha}}d\alpha&=\int_{1}^{\infty}\frac{e^{-xt}}{t}dt-\int_{\frac{1}{\sin\psi}}^{\infty}\frac{e^{-xt}}{t}dt\\
 		&=E_1\left(x\right)-\int_{\frac{x}{\sin\psi}}^{\infty}\frac{e^{-r}}{r}dr\\
-		&=E_1\left(x\right)-E_1\left(\frac{x}{\sin{x}}\right)\\
+		&=E_1\left(x\right)-E_1\left(\frac{x}{\sin{\psi}}\right)\\
 		&=E_1\left(x\right)-E_1\left(x\csc\psi\right)
 	\end{align}
-	
+
+	\subsubsection{Limits with exponential function}
+	\label{subsubsec: limit_withexpfunc}
+
+	\begin{itemize}
+		\item $\frac{1}{2}\ln\left(1+\frac{2}{x}\right)\leq{}e^xE_1\left(x\right)\leq\ln\left(1+\frac{1}{x}\right)$, if $x>0$. See \cite{gautschi} for a derivation.
+		\item When taking a look at the definition \ref{eq: E1} it is clear that the monotone decreasing integrand forces the limit of the exponential integral to zero: $\lim_{x\to\infty}E_1\left(x\right)=0$.
+		\item Trivially the same holds for $\lim_{x\to\infty}e^{-x}E_1\left(x\right)=0$.
+		\item Since $e^{x}E_1\left(x\right)\leq\ln\left(1+\frac{1}{x}\right)$ and the function on the right side tends to zero $\lim_{x\to\infty}\ln\left(1+\frac{1}{x}\right)=0$, we see that $\lim_{x\to\infty}e^{x}E_1\left(x\right)=\lim_{x\to\infty}D\left(x\right)=0$ as well.
+		\item Multiplying with the inverse exponential function and rewriting leads to $\lim_{x\to\infty}e^{-x}D\left(x\right)=\lim_{x\to\infty}E_1\left(x\right)=0$.
+		\item However, $\lim_{x\to\infty}e^{x}D\left(x\right)=e^{2x}E_1\left(x\right)$ diverges.
+	\end{itemize}
+
 	\subsection[Integrals involving E1(x)]{Integrals involving $E_1\left(x\right)$}
 
 	\begin{table}[h]
@@ -349,7 +361,7 @@
 
 	\subsection{Negative arguments}
 
-	In the previous derivations we always assumed the argument of the exponential integral to be positive. But one might want to evaluate the exponential integral for negative arguments too. That's possible if we take the \emph{Cauchy principal value} of the otherwise diverging integral, which is defined as (e.g. \cite{bronstein}):
+	In the previous derivations we always assumed the argument of the exponential integral to be positive. But one might want to evaluate the exponential integral for negative arguments too. That's possible if we take the \emph{Cauchy principal value} $\mathcal{PV}$ of the otherwise diverging integral, which is defined as (e.g. \cite{bronstein}):
 
 	\begin{gather}
 		\mathcal{PV}\left[\int_{a}^{b}f\left(x\right)dx\right]=\lim_{\epsilon\to{}0^{+}}\left[\int_{a}^{x_0-\epsilon}f\left(x\right)dx+\int_{x_0+\epsilon}^{b}f\left(x\right)dx\right]
@@ -362,7 +374,7 @@
 	\end{align}
 
 	Let us now assume a negative argument $x<0$. Then we can define $a=-x>0$ and split up the integral. For positive values of $a$ the Cauchy principal value converges and the limit is just the exponential integral $E_1\left(a\right)$:
-	
+
 	\begin{align}
 		E_1\left(x=-a\right)=\mathcal{PV}\left[\int_{-a}^{\infty}\frac{e^{-w}}{w}dw\right]&=\mathcal{PV}\left[\int_{-a}^{a}\frac{e^{-w}}{w}dw+\int_{a}^{\infty}\frac{e^{-w}}{w}dw\right]\\
 		&=\mathcal{PV}\left[\int_{-a}^{a}\frac{e^{-w}}{w}dw\right]+E_1\left(a\right)
@@ -385,7 +397,7 @@
 	\end{align}
 
 	The last integral converges (even without the Cauchy principal value), and can easily be numerically integrated. For example:
-	
+
 	\begin{align}
 		E_1\left(-1\right)&=\int_{0}^{1}\left(\frac{e^{-w}}{w}-\frac{e^w}{w}\right)dw+E_1\left(1\right)\\
 		&\approx-1.89512
